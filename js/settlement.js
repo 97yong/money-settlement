@@ -43,7 +43,7 @@ export class SettlementManager {
             }
         });
 
-        // 최종 정산 금액 계산
+        // 최종 정산 금액 계산 (지출 - 부담)
         const settlements = [];
         participants.forEach(name => {
             const balance = totalSpent[name] - totalShare[name];
@@ -162,18 +162,20 @@ export class SettlementManager {
         settlementMethods.className = 'settlement-methods';
         settlementMethods.innerHTML = `
             <h3>정산 방법</h3>
-            <div class="settlement-cards">
-                ${result.methods.map(method => `
-                    <div class="settlement-card">
-                        <div class="method-item">
-                            <span class="participant-name">${method.from}</span>
-                            <span class="method-arrow">→</span>
-                            <span class="participant-name">${method.to}</span>
-                            <span class="method-amount">${method.amount.toLocaleString()}원</span>
+            ${result.methods.length > 0 ? `
+                <div class="settlement-cards">
+                    ${result.methods.map(method => `
+                        <div class="settlement-card">
+                            <div class="method-item">
+                                <span class="participant-name">${method.from}</span>
+                                <span class="method-arrow">→</span>
+                                <span class="participant-name">${method.to}</span>
+                                <span class="method-amount">${method.amount.toLocaleString()}원</span>
+                            </div>
                         </div>
-                    </div>
-                `).join('')}
-            </div>
+                    `).join('')}
+                </div>
+            ` : '<p>정산할 금액이 없습니다.</p>'}
         `;
 
         resultContent.appendChild(expenseDetails);
