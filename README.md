@@ -27,8 +27,10 @@
 ## 📱 작동화면
 
 1. 입력 화면
+![image](https://github.com/user-attachments/assets/6713da4a-e5cc-49b0-ba42-2cf6f3590fcf)
 
 2. 정산 결과
+![image](https://github.com/user-attachments/assets/e63efd6e-5947-4107-937a-6da5695459fe)
 
 
 ## 🚀 사용 방법
