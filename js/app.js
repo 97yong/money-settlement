@@ -168,55 +168,7 @@ class App {
     }
 }
 
-// 조회수 관리 클래스
-class ViewCounter {
-    constructor() {
-        this.todayKey = 'today_views';
-        this.totalKey = 'total_views';
-        this.lastVisitKey = 'last_visit';
-        this.init();
-    }
-
-    init() {
-        this.loadViews();
-        this.updateViews();
-        this.updateDisplay();
-    }
-
-    loadViews() {
-        const today = new Date().toDateString();
-        const lastVisit = localStorage.getItem(this.lastVisitKey);
-
-        // 마지막 방문이 오늘이 아니면 오늘 조회수 초기화
-        if (lastVisit !== today) {
-            localStorage.setItem(this.todayKey, '0');
-            localStorage.setItem(this.lastVisitKey, today);
-        }
-
-        this.todayViews = parseInt(localStorage.getItem(this.todayKey)) || 0;
-        this.totalViews = parseInt(localStorage.getItem(this.totalKey)) || 0;
-    }
-
-    updateViews() {
-        this.todayViews++;
-        this.totalViews++;
-        localStorage.setItem(this.todayKey, this.todayViews.toString());
-        localStorage.setItem(this.totalKey, this.totalViews.toString());
-    }
-
-    updateDisplay() {
-        const todayElement = document.querySelector('.today-count');
-        const totalElement = document.querySelector('.total-count');
-
-        if (todayElement && totalElement) {
-            todayElement.textContent = this.todayViews.toLocaleString();
-            totalElement.textContent = this.totalViews.toLocaleString();
-        }
-    }
-}
-
-// 페이지 로드 시 조회수 카운터 초기화
+// 페이지 로드 시 애플리케이션 초기화
 document.addEventListener('DOMContentLoaded', () => {
-    new ViewCounter();
     new App();
 }); 
