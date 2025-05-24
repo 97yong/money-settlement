@@ -10,8 +10,9 @@
 
 ## 미리보기
 
-<img src="https://github.com/user-attachments/assets/76d5805e-d58b-4d7f-93fd-51b98f88c3ba" width="49%" alt="입력 화면">
-<img src="https://github.com/user-attachments/assets/da0def5f-8494-4d2d-bb0f-90765c4fe325" width="49%" alt="정산 결과">
+<img src="https://github.com/user-attachments/assets/76d5805e-d58b-4d7f-93fd-51b98f88c3ba" width="100%" alt="입력 화면">
+<br><br>
+<img src="https://github.com/user-attachments/assets/da0def5f-8494-4d2d-bb0f-90765c4fe325" width="100%" alt="정산 결과">
 
 ## 기능
 
