@@ -102,106 +102,84 @@ export class SettlementManager {
         // 지출 내역 섹션
         const expenseDetails = document.createElement('div');
         expenseDetails.className = 'expense-details';
-        
-        const expenseHeader = document.createElement('h3');
-        expenseHeader.textContent = '지출 내역';
-        expenseDetails.appendChild(expenseHeader);
-
-        const expenseTable = document.createElement('table');
-        expenseTable.className = 'expense-table';
-        expenseTable.innerHTML = `
-            <thead>
-                <tr>
-                    <th class="expense-header-title">항목</th>
-                    <th class="expense-header-amount">금액</th>
-                    <th class="expense-header-payer">지불자</th>
-                    <th class="expense-header-excluded">제외</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${result.expenses.map(expense => `
+        expenseDetails.innerHTML = `
+            <h3>지출 내역</h3>
+            <table class="expense-table">
+                <thead>
                     <tr>
-                        <td class="expense-title">${expense.name}</td>
-                        <td class="expense-amount">${expense.amount.toLocaleString()}원</td>
-                        <td class="expense-payer">${expense.payer}</td>
-                        <td class="expense-excluded">${expense.excluded.length > 0 ? `제외: ${expense.excluded.join(', ')}` : ''}</td>
+                        <th class="expense-header-title">항목</th>
+                        <th class="expense-header-amount">금액</th>
+                        <th class="expense-header-payer">지불자</th>
+                        <th class="expense-header-excluded">제외</th>
                     </tr>
-                `).join('')}
-            </tbody>
+                </thead>
+                <tbody>
+                    ${result.expenses.map(expense => `
+                        <tr>
+                            <td class="expense-title">${expense.name}</td>
+                            <td class="expense-amount">${expense.amount.toLocaleString()}원</td>
+                            <td class="expense-payer">${expense.payer}</td>
+                            <td class="expense-excluded">${expense.excluded.length > 0 ? `제외: ${expense.excluded.join(', ')}` : ''}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
         `;
-        expenseDetails.appendChild(expenseTable);
-
-        resultContent.appendChild(expenseDetails);
-
-        // 오른쪽 컨테이너 (정산 결과 + 정산 방법)
-        const settlementContainer = document.createElement('div');
-        settlementContainer.className = 'settlement-container';
 
         // 정산 결과 섹션
         const settlementDetails = document.createElement('div');
         settlementDetails.className = 'settlement-details';
-        
-        const settlementResultHeader = document.createElement('h3');
-        settlementResultHeader.textContent = '정산 결과';
-        settlementDetails.appendChild(settlementResultHeader);
-
-        result.settlements.forEach(settlement => {
-            const settlementItem = document.createElement('div');
-            settlementItem.className = 'settlement-card';
-            
-            const settlementName = document.createElement('div');
-            settlementName.className = 'settlement-name';
-            settlementName.textContent = settlement.name;
-            settlementItem.appendChild(settlementName);
-
-            const settlementInfo = document.createElement('div');
-            settlementInfo.className = 'settlement-info';
-            const balance = settlement.spent - settlement.share;
-            settlementInfo.innerHTML = `
-                <div class="settlement-amount">
-                    <span class="amount-label">지출</span>
-                    <span class="amount-value">${settlement.spent.toLocaleString()}원</span>
-                </div>
-                <div class="settlement-amount">
-                    <span class="amount-label">부담</span>
-                    <span class="amount-value">${settlement.share.toLocaleString()}원</span>
-                </div>
-                <div class="settlement-divider"></div>
-                <div class="settlement-balance ${balance > 0 ? 'positive' : 'negative'}">
-                    <span class="amount-label">결과</span>
-                    <span class="amount-value">${balance > 0 ? '+' : ''}${balance.toLocaleString()}원</span>
-                </div>
-            `;
-            settlementItem.appendChild(settlementInfo);
-            settlementDetails.appendChild(settlementItem);
-        });
-
-        settlementContainer.appendChild(settlementDetails);
+        settlementDetails.innerHTML = `
+            <h3>정산 결과</h3>
+            <div class="settlement-cards">
+                ${result.settlements.map(settlement => {
+                    const balance = settlement.spent - settlement.share;
+                    return `
+                    <div class="settlement-card">
+                        <div class="settlement-name">${settlement.name}</div>
+                        <div class="settlement-info">
+                            <div class="settlement-amount">
+                                <span class="amount-label">지출</span>
+                                <span class="amount-value">${settlement.spent.toLocaleString()}원</span>
+                            </div>
+                            <div class="settlement-amount">
+                                <span class="amount-label">부담</span>
+                                <span class="amount-value">${settlement.share.toLocaleString()}원</span>
+                            </div>
+                            <div class="settlement-divider"></div>
+                            <div class="settlement-balance ${balance > 0 ? 'positive' : 'negative'}">
+                                <span class="amount-label">결과</span>
+                                <span class="amount-value">${balance > 0 ? '+' : ''}${balance.toLocaleString()}원</span>
+                            </div>
+                        </div>
+                    </div>
+                `}).join('')}
+            </div>
+        `;
 
         // 정산 방법 섹션
         const settlementMethods = document.createElement('div');
         settlementMethods.className = 'settlement-methods';
-        
-        const settlementHeader = document.createElement('h3');
-        settlementHeader.textContent = '정산 방법';
-        settlementMethods.appendChild(settlementHeader);
+        settlementMethods.innerHTML = `
+            <h3>정산 방법</h3>
+            <div class="settlement-cards">
+                ${result.methods.map(method => `
+                    <div class="settlement-card">
+                        <div class="method-item">
+                            <span class="participant-name">${method.from}</span>
+                            <span class="method-arrow">→</span>
+                            <span class="participant-name">${method.to}</span>
+                            <span class="method-amount">${method.amount.toLocaleString()}원</span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
 
-        result.methods.forEach(method => {
-            const methodItem = document.createElement('div');
-            methodItem.className = 'method-item';
-            methodItem.innerHTML = `
-                <span class="method-detail">
-                    <span class="from participant-name">${method.from}</span>
-                    <span class="method-arrow">→</span>
-                    <span class="to participant-name">${method.to}</span>
-                </span>
-                <span class="method-amount">${method.amount.toLocaleString()}원</span>
-            `;
-            settlementMethods.appendChild(methodItem);
-        });
+        resultContent.appendChild(expenseDetails);
+        resultContent.appendChild(settlementDetails);
+        resultContent.appendChild(settlementMethods);
 
-        settlementContainer.appendChild(settlementMethods);
-        resultContent.appendChild(settlementContainer);
         return resultContent;
     }
 } 

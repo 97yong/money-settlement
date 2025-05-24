@@ -825,6 +825,7 @@ h2 {
     border: 1px solid var(--border-color);
     padding: 0.75rem;
     grid-column: 1;
+    grid-row: 1 / span 2;
 }
 
 .expense-list {
@@ -896,15 +897,24 @@ h3 {
     padding: 1rem;
 }
 
+.settlement-methods h3,
+.settlement-details h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.settlement-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
 .settlement-card {
     background-color: var(--background-color);
     border-radius: 6px;
-    margin-bottom: 0.5rem;
     padding: 0.75rem;
-}
-
-.settlement-card:last-child {
-    margin-bottom: 0;
 }
 
 .settlement-name {
@@ -912,6 +922,7 @@ h3 {
     color: var(--text-primary);
     margin-bottom: 0.5rem;
     font-size: 0.95rem;
+    padding-left: 0.5rem;
 }
 
 .settlement-info {
