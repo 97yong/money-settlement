@@ -22,7 +22,6 @@
 
 - [실행 사이트](https://97yong.github.io/money-settlement/)
 
-> 👆 이미지를 클릭하면 데모 사이트로 이동합니다.
 
 ## 📱 작동화면
 
