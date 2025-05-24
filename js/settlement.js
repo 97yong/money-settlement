@@ -119,7 +119,7 @@ export class SettlementManager {
                             <td class="expense-title">${expense.name}</td>
                             <td class="expense-amount">${expense.amount.toLocaleString()}원</td>
                             <td class="expense-payer">${expense.payer}</td>
-                            <td class="expense-excluded">${expense.excluded.length > 0 ? `제외: ${expense.excluded.join(', ')}` : ''}</td>
+                            <td class="expense-excluded">${expense.excluded.length > 0 ? `${expense.excluded.join(', ')}` : ''}</td>
                         </tr>
                     `).join('')}
                 </tbody>
