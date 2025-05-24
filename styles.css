@@ -1,0 +1,1174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --danger-color: #ef4444;
+    --danger-hover: #dc2626;
+    --background-color: #f8fafc;
+    --card-background: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--card-background);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    width: 100%;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    background-color: var(--card-background);
+}
+
+.back-button {
+    position: absolute;
+    left: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: var(--background-color);
+}
+
+.back-button.hidden {
+    display: none;
+}
+
+h1 {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    width: 100%;
+}
+
+h2 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.main-content {
+    padding: 2rem;
+    position: relative;
+    min-height: 600px;
+    display: flex;
+    gap: 2rem;
+}
+
+.section {
+    background-color: var(--card-background);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.participants-section {
+    width: 400px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.participants-section.confirmed {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.participants-container {
+    flex: 1;
+    margin-bottom: 1rem;
+}
+
+.expenses-section {
+    flex: 1;
+    display: none;
+    flex-direction: column;
+}
+
+.expenses-section.show {
+    display: flex;
+}
+
+.expenses-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.expense-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr 0.8fr auto;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--background-color);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.expense-header-item {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.expense-header-item:first-child {
+    text-align: center;
+}
+
+.expense-header-item:nth-child(2) {
+    text-align: center;
+}
+
+.expense-header-info {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.expense-header-title {
+    text-align: left;
+}
+
+.expense-header-amount {
+    text-align: right;
+}
+
+.expense-header-payer {
+    text-align: center;
+}
+
+.expense-header-excluded {
+    text-align: left;
+}
+
+.expense-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr 0.8fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: var(--card-background);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+    position: relative;
+    animation: slideIn 0.3s ease-out;
+}
+
+.expense-item input[type="text"] {
+    text-align: center;
+    min-width: 200px;
+    font-size: 0.95rem;
+    height: 36px;
+    padding: 0.5rem;
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.expense-item input[type="number"] {
+    text-align: center;
+    min-width: 100px;
+    font-size: 0.95rem;
+    height: 36px;
+    padding: 0.5rem;
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.expense-info {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 1rem;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.expense-title {
+    font-weight: 500;
+    color: var(--text-primary);
+    text-align: left;
+    min-width: 80px;
+}
+
+.expense-amount {
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: right;
+    min-width: 70px;
+    margin-right: 2rem;
+}
+
+.expense-payer {
+    color: var(--text-secondary);
+    text-align: center;
+    min-width: 100px;
+}
+
+.expense-excluded {
+    color: var(--danger-color);
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.expense-detail {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+}
+
+.expense-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: var(--primary-color);
+}
+
+.expense-item input[type="text"]:focus,
+.expense-item input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.payer-select {
+    padding: 0.4rem;
+    font-size: 0.95rem;
+    height: 36px;
+    width: 100%;
+    text-align: center;
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.payer-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.exclude-toggle {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+    height: 36px;
+    width: 100%;
+    text-align: center;
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.exclude-toggle:hover {
+    background-color: var(--background-color);
+    border-color: var(--primary-color);
+}
+
+.exclude-toggle.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.exclude-toggle.has-excluded {
+    background-color: var(--background-color);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.exclude-toggle.has-excluded:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.exclude-participants {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0.75rem;
+    box-shadow: var(--shadow-lg);
+    z-index: 10;
+    display: none;
+    min-width: 250px;
+    margin-bottom: 0.5rem;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.exclude-participants.show {
+    display: block;
+}
+
+.exclude-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.exclude-checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem;
+    background-color: var(--background-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.exclude-checkboxes label:hover {
+    background-color: var(--border-color);
+}
+
+.exclude-checkboxes input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.remove-button {
+    padding: 0.5rem;
+    width: 32px;
+    height: 32px;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-button:hover {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+    color: white;
+}
+
+.remove-button svg {
+    width: 16px;
+    height: 16px;
+}
+
+.result-item {
+    animation: slideIn 0.3s ease-out;
+}
+
+.settlement-step {
+    animation: slideIn 0.3s ease-out;
+}
+
+.expense-detail {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.expense-detail {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background-color: var(--card-background);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.expense-detail:last-child {
+    margin-bottom: 0;
+}
+
+.expense-detail h5 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.expense-detail ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.expense-detail li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+}
+
+.expense-detail li:last-child {
+    border-bottom: none;
+}
+
+.expense-detail small {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.payer-select-container {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    position: relative;
+}
+
+.payer-nav-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.payer-nav {
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    padding: 0.2rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.7rem;
+}
+
+.payer-nav:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.exclude-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--background-color);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.exclude-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.exclude-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.exclude-checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--card-background);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+}
+
+.exclude-checkboxes label:hover {
+    background-color: var(--border-color);
+}
+
+.exclude-checkboxes input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.quick-payer {
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    padding: 0.4rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quick-payer:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.expense-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr 0.8fr auto;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--background-color);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.expense-header-item {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.expense-header-item:first-child {
+    text-align: center;
+}
+
+.expense-header-item:nth-child(2) {
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .participants-section {
+        width: 100%;
+    }
+
+    .participants-section.confirmed {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        border-radius: 0;
+    }
+
+    .main-content {
+        padding: 1rem;
+        min-height: auto;
+    }
+
+    .expense-header,
+    .expense-item {
+        grid-template-columns: 1fr 1fr 1fr 1fr auto;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+}
+
+.participant-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    align-items: center;
+}
+
+.participant-input input {
+    flex: 1;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.participant-input input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.add-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.add-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.confirm-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.confirm-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.settle-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.settle-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.result-header {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: var(--background-color);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.result-header h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.result-summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.result-item {
+    padding: 1rem;
+    background-color: var(--card-background);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+    animation: slideIn 0.3s ease-out;
+}
+
+.result-item:last-child {
+    margin-bottom: 0;
+}
+
+.participant-result {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.participant-result .participant-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.settlement-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.settlement-details .balance {
+    font-weight: 600;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.settlement-details .balance.positive {
+    color: #10b981;
+}
+
+.settlement-details .balance.negative {
+    color: var(--danger-color);
+}
+
+@media (max-width: 768px) {
+    .result-summary {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+#result-section {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0.75rem;
+}
+
+#result-container {
+    width: 100%;
+}
+
+.result-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.expense-details {
+    background-color: var(--card-background);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 0.75rem;
+    grid-column: 1;
+}
+
+.expense-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.expense-result-item {
+    padding: 0.5rem;
+    background-color: var(--background-color);
+    border-radius: 6px;
+}
+
+.expense-info {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 1rem;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.expense-title {
+    font-weight: 500;
+    color: var(--text-primary);
+    text-align: left;
+    min-width: 80px;
+}
+
+.expense-amount {
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: right;
+    min-width: 70px;
+    margin-right: 2rem;
+}
+
+.expense-payer {
+    color: var(--text-secondary);
+    text-align: center;
+    min-width: 100px;
+}
+
+.expense-excluded {
+    color: var(--danger-color);
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.settlement-container {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.settlement-methods,
+.settlement-details {
+    background-color: var(--card-background);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+}
+
+.settlement-card {
+    background-color: var(--background-color);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem;
+}
+
+.settlement-card:last-child {
+    margin-bottom: 0;
+}
+
+.settlement-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.settlement-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.5rem;
+}
+
+.settlement-amount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    padding: 0.3rem 0;
+}
+
+.amount-label {
+    color: var(--text-secondary);
+    min-width: 50px;
+}
+
+.amount-value {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.settlement-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0.3rem 0;
+}
+
+.settlement-balance {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.2rem 0;
+}
+
+.settlement-balance.positive .amount-value {
+    color: #10b981;
+}
+
+.settlement-balance.negative .amount-value {
+    color: var(--danger-color);
+}
+
+.method-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.75rem;
+    background-color: var(--background-color);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.method-item:last-child {
+    margin-bottom: 0;
+}
+
+.method-arrow {
+    color: var(--text-secondary);
+}
+
+.method-amount {
+    margin-left: auto;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.skeleton-loading {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+}
+
+.skeleton-expense-details,
+.skeleton-settlement-details {
+    background-color: var(--card-background);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+}
+
+.skeleton-header {
+    height: 24px;
+    width: 120px;
+    background: linear-gradient(90deg, 
+        var(--background-color) 25%, 
+        var(--border-color) 50%, 
+        var(--background-color) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.skeleton-item {
+    height: 48px;
+    background: linear-gradient(90deg, 
+        var(--background-color) 25%, 
+        var(--border-color) 50%, 
+        var(--background-color) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+}
+
+.skeleton-item:last-child {
+    margin-bottom: 0;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.participant-name {
+    font-weight: 500;
+}
+
+.method-detail .from.participant-name {
+    color: var(--text-primary);
+}
+
+.method-detail .to.participant-name {
+    color: var(--text-primary);
+}
+
+.expense-participants .participant-name {
+    color: var(--text-primary);
+}
+
+.result-section {
+    display: none;
+}
+
+.result-section:not(.hidden) {
+    display: block;
+}
+
+.settlement-details h3,
+.settlement-methods h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.settlement-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0.5rem 0;
+}
+
+.expense-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+}
+
+.expense-table th,
+.expense-table td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.expense-table th {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.expense-table td {
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.expense-table th.expense-header-amount,
+.expense-table td.expense-amount {
+    text-align: center;
+}
+
+.expense-table th.expense-header-payer,
+.expense-table td.expense-payer {
+    text-align: center;
+}
+
+.expense-table th.expense-header-excluded,
+.expense-table td.expense-excluded {
+    text-align: center;
+}
+
+.expense-table td.expense-amount {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.expense-table td.expense-excluded {
+    color: var(--danger-color);
+    font-size: 0.9rem;
+}
+
+.settlement-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.settlement-amount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.amount-label {
+    color: var(--text-secondary);
+}
+
+.amount-value {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.settlement-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0.5rem 0;
+}
+
+.settlement-balance {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-top: 0.3rem;
+}
+
+.settlement-balance.positive .amount-value {
+    color: #10b981;
+}
+
+.settlement-balance.negative .amount-value {
+    color: var(--danger-color);
+} 

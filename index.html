@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="간편한 돈 정산 계산기 - 여러 사람과 함께 사용하는 지출 정산 도구">
+    <title>돈 정산 계산기</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <button class="back-button hidden" id="back-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <h1>돈 정산 계산기</h1>
+        </header>
+        
+        <div class="main-content">
+            <div class="section participants-section">
+                <h2>참여자</h2>
+                <div class="participants-container">
+                    <!-- 참여자 입력칸이 여기에 동적으로 추가됩니다 -->
+                </div>
+                <button class="add-button" id="addParticipantBtn">참여자 추가</button>
+                <button class="confirm-button" id="confirmParticipantsBtn">참여자 확정</button>
+            </div>
+
+            <div class="section expenses-section">
+                <h2>지출 내역</h2>
+                <div class="expenses-container">
+                    <div class="expense-header">
+                        <div class="expense-header-item">항목</div>
+                        <div class="expense-header-item">금액</div>
+                        <div class="expense-header-item">지불자</div>
+                        <div class="expense-header-item">제외</div>
+                        <div class="expense-header-item"></div>
+                    </div>
+                    <!-- 지출 항목들이 여기에 동적으로 추가됩니다 -->
+                </div>
+                <button class="add-button" id="addExpenseBtn">지출 항목 추가</button>
+                <button class="settle-button" id="settleExpensesBtn">지출 확정</button>
+            </div>
+
+            <div class="section hidden" id="result-section">
+                <h2>정산 결과</h2>
+                <div id="result-container"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js" type="module"></script>
+</body>
+</html> 
