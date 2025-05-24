@@ -574,33 +574,6 @@ h2 {
     border-color: var(--primary-color);
 }
 
-.expense-header {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1.5fr 0.8fr auto;
-    gap: 1rem;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background-color: var(--background-color);
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    animation: fadeIn 0.3s ease-out;
-}
-
-.expense-header-item {
-    font-weight: 600;
-    color: var(--text-primary);
-    font-size: 0.95rem;
-    text-align: center;
-}
-
-.expense-header-item:first-child {
-    text-align: center;
-}
-
-.expense-header-item:nth-child(2) {
-    text-align: center;
-}
-
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -633,20 +606,209 @@ h2 {
 }
 
 @media (max-width: 768px) {
+    body {
+        padding: 0.5rem;
+    }
+
     .container {
         border-radius: 0;
     }
 
     .main-content {
-        padding: 1rem;
+        padding: 0.75rem;
         min-height: auto;
     }
 
     .expense-header,
     .expense-item {
-        grid-template-columns: 1fr 1fr 1fr 1fr auto;
+        grid-template-columns: 1fr 1fr;
         gap: 0.5rem;
+        padding: 0.75rem;
+    }
+
+    .expense-header-item,
+    .expense-item > * {
+        font-size: 0.9rem;
+    }
+
+    .expense-info {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .expense-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+
+    .expense-amount {
+        font-size: 1.1rem;
+        margin-right: 0;
+        text-align: left;
+    }
+
+    .expense-payer {
+        font-size: 0.9rem;
+        text-align: left;
+        color: var(--text-secondary);
+    }
+
+    .expense-excluded {
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+    }
+
+    .expense-detail {
         padding: 0.5rem;
+    }
+
+    .expense-detail h5 {
+        font-size: 0.95rem;
+    }
+
+    .expense-detail li {
+        font-size: 0.9rem;
+        padding: 0.3rem 0;
+    }
+
+    .result-content {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .expense-details {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .settlement-container {
+        grid-column: 1;
+    }
+
+    .settlement-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .settlement-card {
+        padding: 0.5rem;
+    }
+
+    .settlement-name {
+        font-size: 0.9rem;
+    }
+
+    .settlement-info {
+        padding: 0.25rem;
+    }
+
+    .settlement-amount {
+        font-size: 0.9rem;
+    }
+
+    .method-item {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .expense-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .expense-table th,
+    .expense-table td {
+        padding: 0.4rem;
+        font-size: 0.85rem;
+    }
+
+    .exclude-participants {
+        min-width: 200px;
+        max-width: 90vw;
+    }
+
+    .exclude-checkboxes {
+        grid-template-columns: 1fr;
+    }
+
+    .exclude-checkboxes label {
+        font-size: 0.85rem;
+    }
+
+    .payer-select {
+        font-size: 0.9rem;
+    }
+
+    .exclude-toggle {
+        font-size: 0.9rem;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-header {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.25rem;
+    }
+
+    .expense-header,
+    .expense-item {
+        grid-template-columns: 1fr;
+    }
+
+    .expense-header-item {
+        display: none;
+    }
+
+    .expense-header-item:first-child {
+        display: block;
+        text-align: left;
+    }
+
+    .expense-item {
+        position: relative;
+        padding: 0.75rem;
+    }
+
+    .expense-item::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        margin-bottom: 0.25rem;
+        display: block;
+    }
+
+    .expense-amount {
+        font-size: 1.2rem;
+    }
+
+    .expense-payer {
+        margin-top: 0.25rem;
+    }
+
+    .expense-excluded {
+        margin-top: 0.25rem;
+    }
+
+    .remove-button {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+
+    .settlement-methods,
+    .settlement-details {
+        padding: 0.75rem;
+    }
+
+    .settlement-methods h3,
+    .settlement-details h3 {
+        font-size: 0.9rem;
     }
 }
 
