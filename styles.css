@@ -153,7 +153,7 @@ h2 {
 
 .expense-header-item:first-child {
     text-align: center;
-    padding-left: 1rem;
+    margin-left: -1.5rem;
 }
 
 .expense-header-item:nth-child(2) {
