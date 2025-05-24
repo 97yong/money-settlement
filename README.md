@@ -27,11 +27,12 @@
 
 1. 입력 화면
    
-![image](https://github.com/user-attachments/assets/6713da4a-e5cc-49b0-ba42-2cf6f3590fcf)
+![image](https://github.com/user-attachments/assets/76d5805e-d58b-4d7f-93fd-51b98f88c3ba)
+
 
 2. 정산 결과
    
-![image](https://github.com/user-attachments/assets/e63efd6e-5947-4107-937a-6da5695459fe)
+![image](https://github.com/user-attachments/assets/da0def5f-8494-4d2d-bb0f-90765c4fe325)
 
 
 ## 🚀 사용 방법
