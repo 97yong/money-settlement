@@ -6,7 +6,7 @@
 
 돈 정산 계산기는 여러 사람이 함께 사용하는 지출 정산을 쉽고 빠르게 처리할 수 있도록 도와주는 웹 서비스입니다. 복잡한 계산 과정을 자동화하여 누구나 쉽게 정산할 수 있습니다.
 
-[바로가기](https://97yong.github.io/money-settlement/)
+[웹 사이트 바로가기](https://97yong.github.io/money-settlement/)
 
 ## 미리보기
 
